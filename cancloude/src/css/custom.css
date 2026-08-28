@@ -1,30 +1,104 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * 复刻 ionicframework.com/docs 的排版与配色
+ * 颜色等数值来自对 Ionic 官网 light/dark 两模式的实测 computed style；
+ * 标题字号在 Ionic 原值（48/32/24）基础上按需求调小
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* ===== 字体：Ionic 使用系统字体栈、不加载 Webfont；追加中文字体保证中文渲染 ===== */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, Inter, "Segoe UI",
+    Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --ifm-font-family-monospace: "SF Mono", SFMono-Regular, "Roboto Mono", Consolas,
+    "Liberation Mono", Menlo, Courier, monospace;
+
+  /* ===== 主色：Ionic 蓝（实测完整色阶） ===== */
+  --ifm-color-primary: #3578e5;
+  --ifm-color-primary-dark: #306cce;
+  --ifm-color-primary-darker: #2d66c3;
+  --ifm-color-primary-darkest: #2554a0;
+  --ifm-color-primary-light: #538ce9;
+  --ifm-color-primary-lighter: #72a1ed;
+  --ifm-color-primary-lightest: #9abcf2;
+
+  /* ===== 文本色（实测） ===== */
+  --ifm-color-content: #222d3a;
+
+  /* ===== 代码块（实测：背景 #F6F8FC、圆角 8px） ===== */
+  --ifm-code-background: #f6f8fc;
   --ifm-code-font-size: 95%;
+  --ifm-pre-border-radius: 8px;
+
+  /* ===== 右侧目录（实测 12.8px / #445B78，字号走默认 0.8rem） ===== */
+  --ifm-toc-link-color: #445b78;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  /* Ionic 暗色实测值 */
+  --ifm-background-color: #03060b;
+  --ifm-background-surface-color: #03060b;
+  --ifm-color-content: #e3e3e3;
+  --ifm-color-content-secondary: #eef1f3;
+  --ifm-code-background: #161d25;
+  --ifm-toc-link-color: #eef1f3;
+  --ifm-hover-overlay: rgba(255, 255, 255, 0.05);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Prism 主题通过内联样式设置代码块背景，需 !important 覆盖以匹配 Ionic 实测值
+   （light #F6F8FC / dark #161D25，随 --ifm-code-background 自动切换） */
+.theme-code-block pre {
+  background: var(--ifm-code-background) !important;
+}
+
+/* ===== 文章排版（.markdown 同时作用于 docs/docs2/blog 正文，与 Ionic 一致；
+   navbar、sidebar、footer 等框架 UI 不受影响，因为 Ionic 也是只在正文区放大字号） ===== */
+.markdown h1 {
+  font-size: 2rem; /* 36px */
+  font-weight: 700;
+  color: #03060b;
+  margin: 0 0 20px;
+}
+.markdown h2 {
+  font-size: 1.50rem; /* 28px */
+  font-weight: 700;
+  color: #03060b;
+  margin: 40px 0 10px;
+}
+.markdown h3 {
+  font-size: 1.35rem; /* 22px */
+  font-weight: 700;
+  color: #03060b;
+  margin: 16px 0 10px;
+}
+.markdown h4 {
+  font-size: 1.25rem; /* 20px，与正文同大、靠加粗区分 */
+  font-weight: 700;
+  color: #03060b;
+  margin: 12px 0 8px;
+}
+
+.markdown p {
+  font-size: 1rem; /* 20px */
+  line-height: 2; /* 40px */
+  color: #35404e;
+  margin-bottom: 20px;
+}
+.markdown li {
+  font-size: 1rem;
+  line-height: 2;
+}
+
+/* 暗色下的标题与正文颜色（实测） */
+[data-theme='dark'] .markdown h1,
+[data-theme='dark'] .markdown h2,
+[data-theme='dark'] .markdown h3,
+[data-theme='dark'] .markdown h4 {
+  color: #ffffff;
+}
+[data-theme='dark'] .markdown p {
+  color: #ced6e0;
 }
